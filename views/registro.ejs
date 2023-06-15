@@ -11,232 +11,245 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.0.js"
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <script src="/script/login.js"></script>
+    <script src="/script/registro.js"></script>
     <!-- No mover el de header -->
     <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/registro.css">
 </head>
 
 <body>
     <%- include('partials/header.ejs') %>
         <main>
             <form action="archivo.php" class="container">
-                <div class="form-group">
+                <div class="form-group col-md-8">
                     <label for="Régimen">Régimen</label>
-                    <input class="form-control" type="text" name="Régimen" id="Régimen">
+                    <select class="form-select" aria-label="Default select example" onchange="loadScreen(this.value)" id="regimen">
+                        <option selected>Selecciona una opción</option>
+                        <option value="Fisica">Persona Física</option>
+                        <option value="Moral">Persona Moral</option>
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label for="Primer apellido">Primer apellido</label>
-                    <input class="form-control" type="text" name="Primer apellido">
+                <div class="form-group captionSeleccion" style="text-align: center;">
+                    <label class="form-text">Para comenzar, selecciona un régimen</label>
                 </div>
-                <div class="form-group">
-                    <label for="segundo apellido">Segundo apellido</label>
-                    <input class="form-control" type="text" name="Segundo apellido" id="Segundo apellido">
+                <div class="form-group toHide" id="fisicaContainer">
+                    <div class="form-group">
+                        <label for="Primer apellido">Primer apellido</label>
+                        <input class="form-control" type="text" name="Primer apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="segundo apellido">Segundo apellido</label>
+                        <input class="form-control" type="text" name="Segundo apellido" id="Segundo apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre(s)">Nombre(s)</label>
+                        <input class="form-control" type="text" name="Nombre(s)" id="Nombre(s)">
+                    </div>
+                    <div class="form-group">
+                        <label for="Fecha">Fecha de nacimiento</label>
+                        <input class="form-control" type="date" name="Fecha" placeholder="(dd/mm/aa)" id="fecha">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="Nombre(s)">Nombre(s)</label>
-                    <input class="form-control" type="text" name="Nombre(s)" id="Nombre(s)">
+                <div id="restOfData">
+                    <div class="form-group">
+                        <label for="RFC">RFC</label>
+                        <input class="form-control" type="text" name="RFC" maxlength="13" id="RFC">
+                    </div>
+                    <div class="form-group toHide" id="moralContainer">
+                        <div class="form-group">
+                            <label for="Razón social">Razón social</label>
+                            <input class="form-control" type="text" name="Razón social">
+                        </div>
+                        <div class="form-group">
+                            <label for="Fecha">Fecha de constitución</label>
+                            <input class="form-control" type="date" name="Fecha de constitución" placeholder="(dd/mm/aa)" id="fecha de consitución">
+                        </div>
+                        <div class="form-group">
+                            <label for="Representante legal">Representante legal</label>
+                            <input class="form-control" type="text" name="Representante legal" maxlength="50" id="RFC">
+                        </div>
+                        <div class="form-group">
+                            <label for="Cédula del proveedor">Cédula del proveedor</label>
+                            <input class="form-control" type="text" name="Cédula del proveedor">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Tipo de calle">Tipo de calle</label>
+                        <input class="form-control" type="text" name="Tipo de calle">
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre de calle">Nombre de calle</label>
+                        <input class="form-control" type="text" name="Nombre de calle">
+                    </div>
+                    <div class="form-group">
+                        <label for="Tipo de calle">Tipo de calle</label>
+                        <input class="form-control" type="text" name="Tipo de calle">
+                    </div>
+                    <div class="form-group">
+                        <label for="Número exterior">Número exterior</label>
+                        <input class="form-control" type="text" name="Número exterior">
+                    </div>
+                    <div class="form-group">
+                        <label for="Número interior">Número interior</label>
+                        <input class="form-control" type="text" name="Número interior" id="Número interior">
+                    </div>
+                    <div class="form-group">
+                        <label for="Tipo de asentamiento">Tipo de asentamiento</label>
+                        <input class="form-control" type="text" name="Tipo de asentamiento">
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre de asentamiento">Nombre de asentamiento</label>
+                        <input class="form-control" type="text" name="Nombre de asentamiento">
+                    </div>
+                    <div class="form-group">
+                        <label for="Código postal">Código postal</label>
+                        <input class="form-control" type="text" name="Código postal" id="Código postal">
+                    </div>
+                    <sele class="form-group"ct id="entidad" name="entidad">
+                        <option value="">Entidad</option>
+                        <option class="form-control" value="AS">Aguascalientes</option>
+                        <option value="BC">Baja California</option>
+                        <option value="BS">Baja California Sur</option>
+                        <option value="CC">Campeche</option>
+                        <option value="DF">Ciudad de Mexico</option>
+                        <option value="CL">Coahuila</option>
+                        <option value="CM">Colima</option>
+                        <option value="CS">Chiapas</option>
+                        <option value="CH">Chihuahua</option>
+                        <option value="DG">Durango</option>
+                        <option value="GT">Guanajuato</option>
+                        <option value="GR">Guerrero</option>
+                        <option value="HG">Hidalgo</option>
+                        <option value="JC">Jalisco</option>
+                        <option value="MC">Estado de Mexico</option>
+                        <option value="MN">Michoacan</option>
+                        <option value="MS">Morelos</option>
+                        <option value="NT">Nayarit</option>
+                        <option value="NL">Nuevo Leon</option>
+                        <option value="OC">Oaxaca</option>
+                        <option value="PL">Puebla</option>
+                        <option value="QT">Queretaro</option>
+                        <option value="QR">Quintana Roo</option>
+                        <option value="SP">San Luis Potosi</option>
+                        <option value="SL">Sinaloa</option>
+                        <option value="SR">Sonora</option>
+                        <option value="TC">Tabasco</option>
+                        <option value="TS">Tamaulipas</option>
+                        <option value="TL">Tlaxcala</option>
+                        <option value="VZ">Veracruz</option>
+                        <option value="YN">Yucatan</option>
+                        <option value="ZS">Zacatecas</option>
+                    </select>
+                    <select id="locoalidad" name="Localidad" required>
+                        <option value="">Localidad</option>
+                        <option value="AS">Aguascalientes</option>
+                        <option value="BC">Baja California</option>
+                        <option value="BS">Baja California Sur</option>
+                        <option value="CC">Campeche</option>
+                        <option value="DF">Ciudad de Mexico</option>
+                        <option value="CL">Coahuila</option>
+                        <option value="CM">Colima</option>
+                        <option value="CS">Chiapas</option>
+                        <option value="CH">Chihuahua</option>
+                        <option value="DG">Durango</option>
+                        <option value="GT">Guanajuato</option>
+                        <option value="GR">Guerrero</option>
+                        <option value="HG">Hidalgo</option>
+                        <option value="JC">Jalisco</option>
+                        <option value="MC">Estado de Mexico</option>
+                        <option value="MN">Michoacan</option>
+                        <option value="MS">Morelos</option>
+                        <option value="NT">Nayarit</option>
+                        <option value="NL">Nuevo Leon</option>
+                        <option value="OC">Oaxaca</option>
+                        <option value="PL">Puebla</option>
+                        <option value="QT">Queretaro</option>
+                        <option value="QR">Quintana Roo</option>
+                        <option value="SP">San Luis Potosi</option>
+                        <option value="SL">Sinaloa</option>
+                        <option value="SR">Sonora</option>
+                        <option value="TC">Tabasco</option>
+                        <option value="TS">Tamaulipas</option>
+                        <option value="TL">Tlaxcala</option>
+                        <option value="VZ">Veracruz</option>
+                        <option value="YN">Yucatan</option>
+                        <option value="ZS">Zacatecas</option>
+                    </select>
+                    <select id="entidad" name="Municipio" required>
+                        <option value="">Municipio</option>
+                        <option value="001">Apozol</option>
+                        <option value="002">Apulco</option>
+                        <option value="003">Atolinga</option>
+                        <option value="004">Benito Juárez</option>
+                        <option value="005">Calera</option>
+                        <option value="006">Cañitas de Felipe Pescador</option>
+                        <option value="007">Concepción del Oro</option>
+                        <option value="008">Cuauhtémoc</option>
+                        <option value="009">Chalchihuites</option>
+                        <option value="010">Fresnillo</option>
+                        <option value="011">Trinidad García de la Cadena</option>
+                        <option value="012">Genaro Codina</option>
+                        <option value="013">General Enrique Estrada</option>
+                        <option value="014">General Francisco R. Murguía</option>
+                        <option value="015">El Plateado de Joaquín Amaro</option>
+                        <option value="016">General Pánfilo Natera</option>
+                        <option value="017">Guadalupe</option>
+                        <option value="018">Huanusco</option>
+                        <option value="019">Jalpa</option>
+                        <option value="020">Jerez</option>
+                        <option value="021">Jiménez del Teul</option>
+                        <option value="022">Juan Aldama</option>
+                        <option value="023">Juchipila</option>
+                        <option value="024">Loreto</option>
+                        <option value="025">Luis Moya</option>
+                        <option value="026">Mazapil</option>
+                        <option value="027">Melchor Ocampo</option>
+                        <option value="028">Mezquital del Oro</option>
+                        <option value="029">Miguel Auza</option>
+                        <option value="030">Momax</option>
+                        <option value="031">Monte Escobedo</option>
+                        <option value="032">Morelos</option>
+                        <option value="033">Moyahua de Estrada</option>
+                        <option value="034">Nochistlán de Mejía</option>
+                        <option value="035">Noria de Ángeles</option>
+                        <option value="036">Ojocaliente</option>
+                        <option value="037">Pánuco</option>
+                        <option value="038">Pinos</option>
+                        <option value="039">Río Grande</option>
+                        <option value="040">Sain Alto</option>
+                        <option value="041">El Salvador</option>
+                        <option value="042">Sombrerete</option>
+                        <option value="043">Susticacán</option>
+                        <option value="044">Tabasco</option>
+                        <option value="045">Tepechitlán</option>
+                        <option value="046">Tepetongo</option>
+                        <option value="047">Teúl de González Ortega</option>
+                        <option value="048">Tlaltenango de Sánchez Román</option>
+                        <option value="049">Valparaíso</option>
+                        <option value="050">Vetagrande</option>
+                        <option value="051">Villa de Cos</option>
+                        <option value="052">Villa García</option>
+                        <option value="053">Villa González Ortega</option>
+                        <option value="054">Villa Hidalgo</option>
+                        <option value="055">Villanueva</option>
+                        <option value="056">Zacatecas</option>
+                        <option value="057">Trancoso</option>
+                        <option value="058">Santa María de la Paz</option>
+                    </select>
+                    <div>
+                        <label for="Teléfono">Teléfono</label>
+                        <input type="text" name="Teléfono" maxlength="13" id="Teléfono">
+                    </div>
+                    <div class="form-group">
+                        <label for="E-mail">E-mail</label>
+                        <input class="form-control" type="text" name="E-mail" maxlength="30" id="E-mail">
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" id="cbox1" value="first_checkbox"> He leido y acepto los
+                            Términos class="form-control" y Condiciones</label><br>
+                    </div>
+                    <button class="btn" type="submit">Registrar</button>
                 </div>
-                <div class="form-group">
-                    <label for="Fecha">Fecha de nacimiento</label>
-                    <input class="form-control" type="date" name="Fecha" placeholder="(dd/mm/aa)" id="fecha">
-                </div>
-                <div class="form-group">
-                    <label for="RFC">RFC</label>
-                    <input class="form-control" type="text" name="RFC" maxlength="13" id="RFC">
-                </div>
-                <div class="form-group">
-                    <label for="Razón social">Razón social</label>
-                    <input class="form-control" type="text" name="Razón social">
-                </div>
-                <div class="form-group">
-                    <label for="Fecha">Fecha de constitución</label>
-                    <input class="form-control" type="date" name="Fecha de constitución" placeholder="(dd/mm/aa)" id="fecha de consitución">
-                </div>
-                <div class="form-group">
-                    <label for="Representante legal">Representante legal</label>
-                    <input class="form-control" type="text" name="Representante legal" maxlength="50" id="RFC">
-                </div>
-                <div class="form-group">
-                    <label for="Cédula del proveedor">Cédula del proveedor</label>
-                    <input class="form-control" type="text" name="Cédula del proveedor">
-                </div>
-                <div class="form-group">
-                    <label for="Tipo de calle">Tipo de calle</label>
-                    <input class="form-control" type="text" name="Tipo de calle">
-                </div>
-                <div class="form-group">
-                    <label for="Nombre de calle">Nombre de calle</label>
-                    <input class="form-control" type="text" name="Nombre de calle">
-                </div>
-                <div class="form-group">
-                    <label for="Tipo de calle">Tipo de calle</label>
-                    <input class="form-control" type="text" name="Tipo de calle">
-                </div>
-                <div class="form-group">
-                    <label for="Número exterior">Número exterior</label>
-                    <input class="form-control" type="text" name="Número exterior">
-                </div>
-                <div class="form-group">
-                    <label for="Número interior">Número interior</label>
-                    <input class="form-control" type="text" name="Número interior" id="Número interior">
-                </div>
-                <div class="form-group">
-                    <label for="Tipo de asentamiento">Tipo de asentamiento</label>
-                    <input class="form-control" type="text" name="Tipo de asentamiento">
-                </div>
-                <div class="form-group">
-                    <label for="Nombre de asentamiento">Nombre de asentamiento</label>
-                    <input class="form-control" type="text" name="Nombre de asentamiento">
-                </div>
-                <div class="form-group">
-                    <label for="Código postal">Código postal</label>
-                    <input class="form-control" type="text" name="Código postal" id="Código postal">
-                </div>
-                <sele class="form-group"ct id="entidad" name="entidad">
-                    <option value="">Entidad</option>
-                    <option class="form-control" value="AS">Aguascalientes</option>
-                    <option value="BC">Baja California</option>
-                    <option value="BS">Baja California Sur</option>
-                    <option value="CC">Campeche</option>
-                    <option value="DF">Ciudad de Mexico</option>
-                    <option value="CL">Coahuila</option>
-                    <option value="CM">Colima</option>
-                    <option value="CS">Chiapas</option>
-                    <option value="CH">Chihuahua</option>
-                    <option value="DG">Durango</option>
-                    <option value="GT">Guanajuato</option>
-                    <option value="GR">Guerrero</option>
-                    <option value="HG">Hidalgo</option>
-                    <option value="JC">Jalisco</option>
-                    <option value="MC">Estado de Mexico</option>
-                    <option value="MN">Michoacan</option>
-                    <option value="MS">Morelos</option>
-                    <option value="NT">Nayarit</option>
-                    <option value="NL">Nuevo Leon</option>
-                    <option value="OC">Oaxaca</option>
-                    <option value="PL">Puebla</option>
-                    <option value="QT">Queretaro</option>
-                    <option value="QR">Quintana Roo</option>
-                    <option value="SP">San Luis Potosi</option>
-                    <option value="SL">Sinaloa</option>
-                    <option value="SR">Sonora</option>
-                    <option value="TC">Tabasco</option>
-                    <option value="TS">Tamaulipas</option>
-                    <option value="TL">Tlaxcala</option>
-                    <option value="VZ">Veracruz</option>
-                    <option value="YN">Yucatan</option>
-                    <option value="ZS">Zacatecas</option>
-                </select>
-                <select id="locoalidad" name="Localidad" required>
-                    <option value="">Localidad</option>
-                    <option value="AS">Aguascalientes</option>
-                    <option value="BC">Baja California</option>
-                    <option value="BS">Baja California Sur</option>
-                    <option value="CC">Campeche</option>
-                    <option value="DF">Ciudad de Mexico</option>
-                    <option value="CL">Coahuila</option>
-                    <option value="CM">Colima</option>
-                    <option value="CS">Chiapas</option>
-                    <option value="CH">Chihuahua</option>
-                    <option value="DG">Durango</option>
-                    <option value="GT">Guanajuato</option>
-                    <option value="GR">Guerrero</option>
-                    <option value="HG">Hidalgo</option>
-                    <option value="JC">Jalisco</option>
-                    <option value="MC">Estado de Mexico</option>
-                    <option value="MN">Michoacan</option>
-                    <option value="MS">Morelos</option>
-                    <option value="NT">Nayarit</option>
-                    <option value="NL">Nuevo Leon</option>
-                    <option value="OC">Oaxaca</option>
-                    <option value="PL">Puebla</option>
-                    <option value="QT">Queretaro</option>
-                    <option value="QR">Quintana Roo</option>
-                    <option value="SP">San Luis Potosi</option>
-                    <option value="SL">Sinaloa</option>
-                    <option value="SR">Sonora</option>
-                    <option value="TC">Tabasco</option>
-                    <option value="TS">Tamaulipas</option>
-                    <option value="TL">Tlaxcala</option>
-                    <option value="VZ">Veracruz</option>
-                    <option value="YN">Yucatan</option>
-                    <option value="ZS">Zacatecas</option>
-                </select>
-                <select id="entidad" name="Municipio" required>
-                    <option value="">Municipio</option>
-                    <option value="001">Apozol</option>
-                    <option value="002">Apulco</option>
-                    <option value="003">Atolinga</option>
-                    <option value="004">Benito Juárez</option>
-                    <option value="005">Calera</option>
-                    <option value="006">Cañitas de Felipe Pescador</option>
-                    <option value="007">Concepción del Oro</option>
-                    <option value="008">Cuauhtémoc</option>
-                    <option value="009">Chalchihuites</option>
-                    <option value="010">Fresnillo</option>
-                    <option value="011">Trinidad García de la Cadena</option>
-                    <option value="012">Genaro Codina</option>
-                    <option value="013">General Enrique Estrada</option>
-                    <option value="014">General Francisco R. Murguía</option>
-                    <option value="015">El Plateado de Joaquín Amaro</option>
-                    <option value="016">General Pánfilo Natera</option>
-                    <option value="017">Guadalupe</option>
-                    <option value="018">Huanusco</option>
-                    <option value="019">Jalpa</option>
-                    <option value="020">Jerez</option>
-                    <option value="021">Jiménez del Teul</option>
-                    <option value="022">Juan Aldama</option>
-                    <option value="023">Juchipila</option>
-                    <option value="024">Loreto</option>
-                    <option value="025">Luis Moya</option>
-                    <option value="026">Mazapil</option>
-                    <option value="027">Melchor Ocampo</option>
-                    <option value="028">Mezquital del Oro</option>
-                    <option value="029">Miguel Auza</option>
-                    <option value="030">Momax</option>
-                    <option value="031">Monte Escobedo</option>
-                    <option value="032">Morelos</option>
-                    <option value="033">Moyahua de Estrada</option>
-                    <option value="034">Nochistlán de Mejía</option>
-                    <option value="035">Noria de Ángeles</option>
-                    <option value="036">Ojocaliente</option>
-                    <option value="037">Pánuco</option>
-                    <option value="038">Pinos</option>
-                    <option value="039">Río Grande</option>
-                    <option value="040">Sain Alto</option>
-                    <option value="041">El Salvador</option>
-                    <option value="042">Sombrerete</option>
-                    <option value="043">Susticacán</option>
-                    <option value="044">Tabasco</option>
-                    <option value="045">Tepechitlán</option>
-                    <option value="046">Tepetongo</option>
-                    <option value="047">Teúl de González Ortega</option>
-                    <option value="048">Tlaltenango de Sánchez Román</option>
-                    <option value="049">Valparaíso</option>
-                    <option value="050">Vetagrande</option>
-                    <option value="051">Villa de Cos</option>
-                    <option value="052">Villa García</option>
-                    <option value="053">Villa González Ortega</option>
-                    <option value="054">Villa Hidalgo</option>
-                    <option value="055">Villanueva</option>
-                    <option value="056">Zacatecas</option>
-                    <option value="057">Trancoso</option>
-                    <option value="058">Santa María de la Paz</option>
-                </select>
-                <div>
-                    <label for="Teléfono">Teléfono</label>
-                    <input type="text" name="Teléfono" maxlength="13" id="Teléfono">
-                </div>
-                <div class="form-group">
-                    <label for="E-mail">E-mail</label>
-                    <input class="form-control" type="text" name="E-mail" maxlength="30" id="E-mail">
-                </div>
-                <div class="form-group">
-                    <label><input type="checkbox" id="cbox1" value="first_checkbox"> He leido y acepto los
-                        Términos class="form-control" y Condiciones</label><br>
-                </div>
-                <but  class="form-group"ton type="submit">Registrar</button>
             </form>
         </ class="form-control"main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

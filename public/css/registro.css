@@ -1,0 +1,25 @@
+main {
+    padding-block: 50px;
+}
+
+div {
+    margin-bottom: 35px;
+}
+
+.toHide {
+    display: none;
+}
+
+#restOfData {
+    display:none;
+}
+
+button {
+    width: 100%;
+    background-color: #8b1d20 !important;
+    color: white !important;
+}
+
+label {
+    margin-left:10px;
+}
