@@ -1,0 +1,31 @@
+#loginBox {
+    height: 50%;
+    width: 40%;
+    padding: 50px;
+    background-color: #e6e9ec;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-block: 5%;
+    min-width: 500px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+button {
+    width: 100%;
+    background-color: #8b1d20 !important;
+    color: white !important;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+

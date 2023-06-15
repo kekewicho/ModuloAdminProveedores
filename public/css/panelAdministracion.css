@@ -1,0 +1,13 @@
+input[type=text] {
+    margin-bottom: 35px;
+}
+
+.bi-hourglass {
+    color: #fcde0c;
+}
+.bi-check2-all {
+    color: #2fab1d;
+}
+.bi-x-lg {
+    color: red;
+}
