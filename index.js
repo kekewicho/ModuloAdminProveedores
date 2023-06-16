@@ -145,6 +145,14 @@ app.post('/submitRegistro', async (req, res) => {
     })
 });
 
+app.post('/updateRegistro', async (req, res) => {
+  const registro = req.body;
+  Proveedores.findOneAndUpdate({'rfc':registro.rfc},registro)
+    .then(data=>{
+      res.redirect('/administracion');
+    })
+});
+
 function requireLogin(req, res, next) {
   if (req.session.loggedIn) {
     // El usuario ha iniciado sesión, permitir el acceso a la siguiente ruta

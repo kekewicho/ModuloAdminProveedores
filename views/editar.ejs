@@ -119,26 +119,26 @@
                 <div class="form-group">
                     <label for="Tipo de asentamiento">Tipo de asentamiento</label>
                     <select class="form-select" type="text" name="tipoAsentamiento">
-                        <option value="Colonia">Colonia</option>
-                        <option value="Barrio">Barrio</option>
-                        <option value="Fraccionamiento">Fraccionamiento</option>
-                        <option value="Residencial">Residencial</option>
-                        <option value="Conjunto habitacional">Conjunto habitacional</option>
-                        <option value="Urbanización">Urbanización</option>
-                        <option value="Unidad habitacional">Unidad habitacional</option>
-                        <option value="Villa">Villa</option>
-                        <option value="Zona residencial">Zona residencial</option>
-                        <option value="Pueblo">Pueblo</option>
-                        <option value="Municipio">Municipio</option>
-                        <option value="Ranchería">Ranchería</option>
-                        <option value="Ejido">Ejido</option>
-                        <option value="Comunidad">Comunidad</option>
-                        <option value="Aldea">Aldea</option>
-                        <option value="Caserío">Caserío</option>
-                        <option value="Hacienda">Hacienda</option>
-                        <option value="Villa">Villa</option>
-                        <option value="Ciudad">Ciudad</option>
-                        <option value="Localidad">Localidad</option>
+                        <option <% if (data.tipoAsentamiento=='Colonia') { %> selected <% } %> value="Colonia">Colonia</option>
+                        <option <% if (data.tipoAsentamiento=='Barrio') { %> selected <% } %> value="Barrio">Barrio</option>
+                        <option <% if (data.tipoAsentamiento=='Fraccionamiento') { %> selected <% } %> value="Fraccionamiento">Fraccionamiento</option>
+                        <option <% if (data.tipoAsentamiento=='Residencial') { %> selected <% } %> value="Residencial">Residencial</option>
+                        <option <% if (data.tipoAsentamiento=='Conjunto habitacional') { %> selected <% } %> value="Conjunto habitacional">Conjunto habitacional</option>
+                        <option <% if (data.tipoAsentamiento=='Urbanización') { %> selected <% } %> value="Urbanización">Urbanización</option>
+                        <option <% if (data.tipoAsentamiento=='Unidad habitacional') { %> selected <% } %> value="Unidad habitacional">Unidad habitacional</option>
+                        <option <% if (data.tipoAsentamiento=='Villa') { %> selected <% } %> value="Villa">Villa</option>
+                        <option <% if (data.tipoAsentamiento=='Zona residencial') { %> selected <% } %> value="Zona residencial">Zona residencial</option>
+                        <option <% if (data.tipoAsentamiento=='Pueblo') { %> selected <% } %> value="Pueblo">Pueblo</option>
+                        <option <% if (data.tipoAsentamiento=='Municipio') { %> selected <% } %> value="Municipio">Municipio</option>
+                        <option <% if (data.tipoAsentamiento=='Ranchería') { %> selected <% } %> value="Ranchería">Ranchería</option>
+                        <option <% if (data.tipoAsentamiento=='Ejido') { %> selected <% } %> value="Ejido">Ejido</option>
+                        <option <% if (data.tipoAsentamiento=='Comunidad') { %> selected <% } %> value="Comunidad">Comunidad</option>
+                        <option <% if (data.tipoAsentamiento=='Aldea') { %> selected <% } %> value="Aldea">Aldea</option>
+                        <option <% if (data.tipoAsentamiento=='Caserío') { %> selected <% } %> value="Caserío">Caserío</option>
+                        <option <% if (data.tipoAsentamiento=='Hacienda') { %> selected <% } %> value="Hacienda">Hacienda</option>
+                        <option <% if (data.tipoAsentamiento=='Villa') { %> selected <% } %> value="Villa">Villa</option>
+                        <option <% if (data.tipoAsentamiento=='Ciudad') { %> selected <% } %> value="Ciudad">Ciudad</option>
+                        <option <% if (data.tipoAsentamiento=='Localidad') { %> selected <% } %> value="Localidad">Localidad</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -153,38 +153,38 @@
                     <label>Entidad</label>
                     <select class="form-select" id="entidad" name="entidad">
                         <option value="" selected disabled>Selecciona una opción</option>
-                        <option value="01">Aguascalientes</option>
-                        <option value="02">Baja California</option>
-                        <option value="03">Baja California Sur</option>
-                        <option value="04">Campeche</option>
-                        <option value="05">Ciudad de Mexico</option>
-                        <option value="06">Coahuila</option>
-                        <option value="07">Colima</option>
-                        <option value="08">Chiapas</option>
-                        <option value="09">Chihuahua</option>
-                        <option value="10">Durango</option>
-                        <option value="11">Guanajuato</option>
-                        <option value="12">Guerrero</option>
-                        <option value="13">Hidalgo</option>
-                        <option value="14">Jalisco</option>
-                        <option value="15">Estado de Mexico</option>
-                        <option value="16">Michoacan</option>
-                        <option value="17">Morelos</option>
-                        <option value="18">Nayarit</option>
-                        <option value="19">Nuevo Leon</option>
-                        <option value="20">Oaxaca</option>
-                        <option value="21">Puebla</option>
-                        <option value="22">Queretaro</option>
-                        <option value="23">Quintana Roo</option>
-                        <option value="24">San Luis Potosi</option>
-                        <option value="25">Sinaloa</option>
-                        <option value="26">Sonora</option>
-                        <option value="27">Tabasco</option>
-                        <option value="28">Tamaulipas</option>
-                        <option value="29">Tlaxcala</option>
-                        <option value="30">Veracruz</option>
-                        <option value="31">Yucatan</option>
-                        <option value="32">Zacatecas</option>
+                        <option <% if (data.entidad=='01') { %> selected <% } %> value="01">Aguascalientes</option>
+                        <option <% if (data.entidad=='02') { %> selected <% } %> value="02">Baja California</option>
+                        <option <% if (data.entidad=='03') { %> selected <% } %> value="03">Baja California Sur</option>
+                        <option <% if (data.entidad=='04') { %> selected <% } %> value="04">Campeche</option>
+                        <option <% if (data.entidad=='05') { %> selected <% } %> value="05">Ciudad de Mexico</option>
+                        <option <% if (data.entidad=='06') { %> selected <% } %> value="06">Coahuila</option>
+                        <option <% if (data.entidad=='07') { %> selected <% } %> value="07">Colima</option>
+                        <option <% if (data.entidad=='08') { %> selected <% } %> value="08">Chiapas</option>
+                        <option <% if (data.entidad=='09') { %> selected <% } %> value="09">Chihuahua</option>
+                        <option <% if (data.entidad=='10') { %> selected <% } %> value="10">Durango</option>
+                        <option <% if (data.entidad=='11') { %> selected <% } %> value="11">Guanajuato</option>
+                        <option <% if (data.entidad=='12') { %> selected <% } %> value="12">Guerrero</option>
+                        <option <% if (data.entidad=='13') { %> selected <% } %> value="13">Hidalgo</option>
+                        <option <% if (data.entidad=='14') { %> selected <% } %> value="14">Jalisco</option>
+                        <option <% if (data.entidad=='15') { %> selected <% } %> value="15">Estado de Mexico</option>
+                        <option <% if (data.entidad=='16') { %> selected <% } %> value="16">Michoacan</option>
+                        <option <% if (data.entidad=='17') { %> selected <% } %> value="17">Morelos</option>
+                        <option <% if (data.entidad=='18') { %> selected <% } %> value="18">Nayarit</option>
+                        <option <% if (data.entidad=='19') { %> selected <% } %> value="19">Nuevo Leon</option>
+                        <option <% if (data.entidad=='20') { %> selected <% } %> value="20">Oaxaca</option>
+                        <option <% if (data.entidad=='21') { %> selected <% } %> value="21">Puebla</option>
+                        <option <% if (data.entidad=='22') { %> selected <% } %> value="22">Queretaro</option>
+                        <option <% if (data.entidad=='23') { %> selected <% } %> value="23">Quintana Roo</option>
+                        <option <% if (data.entidad=='24') { %> selected <% } %> value="24">San Luis Potosi</option>
+                        <option <% if (data.entidad=='25') { %> selected <% } %> value="25">Sinaloa</option>
+                        <option <% if (data.entidad=='26') { %> selected <% } %> value="26">Sonora</option>
+                        <option <% if (data.entidad=='27') { %> selected <% } %> value="27">Tabasco</option>
+                        <option <% if (data.entidad=='28') { %> selected <% } %> value="28">Tamaulipas</option>
+                        <option <% if (data.entidad=='29') { %> selected <% } %> value="29">Tlaxcala</option>
+                        <option <% if (data.entidad=='30') { %> selected <% } %> value="30">Veracruz</option>
+                        <option <% if (data.entidad=='31') { %> selected <% } %> value="31">Yucatan</option>
+                        <option <% if (data.entidad=='32') { %> selected <% } %> value="32">Zacatecas</option>
                     </select>
                 </div>
                 <div class="form-group row">
@@ -243,13 +243,13 @@
                         <option <% if (giro=='Arte y cultura') { %> selected <% } %> value="Arte y cultura">Arte y cultura</option>
                         <option <% if (giro=='Organizaciones sin fines de lucro') { %> selected <% } %> value="Organizaciones sin fines de lucro">Organizaciones sin fines de lucro</option>
                     </select>
-            </div>
-                <div class="form-group">
-                    <label style="font-weight: bold;"><input type="checkbox" id="cbox1" value="checked" name="tyc" <% if (data.tyc=='checked') { %> checked <% } %> >
-                        He
-                        leido y acepto los Términos y Condiciones</label><br>
+            </div class="form-group row">
+                <div class="form-group col-md-6">
+                    <button class="btn btn-danger" type="submit" style="margin-top: 35px;">Rechazar solicitud</button>
                 </div>
-                <button class="btn" type="submit" style="margin-top: 35px;">Registrar</button>
+                <div class="form-group col-md-6">
+                    <button class="btn btn-success" type="submit" style="margin-top: 35px;">Aceptar solicitud</button>
+                </div>
             </div>
         </form>
     </main>
