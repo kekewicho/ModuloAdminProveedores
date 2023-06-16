@@ -1,16 +1,79 @@
+const estadoSelect = document.getElementById('entidad');
+const municipioSelect = document.getElementById('municipio');
+const localidadSelect = document.getElementById('localidad');
+let csvData; // Declara la variable csvData en un alcance más amplio
+
+
+fetch('/utils/localidadesData.csv')
+    .then(response => response.text())
+    .then(data => {
+        const lines = data.split('\n');
+        const headers = lines[0].split(',');
+
+        csvData = lines.slice(1).map(line => {
+            const columns = line.split(',');
+            const rowData = {};
+
+            headers.forEach((header, index) => {
+                rowData[header] = columns[index];
+            });
+
+            return rowData;
+        });
+
+        // Aquí dentro del bloque de la función then, csvData está disponible
+        estadoSelect.addEventListener('change', () => {
+            munSeleccionados=[];
+            const estadoSeleccionado = estadoSelect.value;
+            municipioSelect.innerHTML = '';
+
+            csvData.forEach((row) => {
+                if (row.CVE_ENT.includes(estadoSeleccionado)) {
+                    if (!munSeleccionados.includes(row.CVE_MUN)) {
+                        const option = document.createElement('option');
+                        option.text = row.NOM_MUN.replace(/['"]+/g, '');
+                        option.value = row.CVE_MUN.replace(/['"]+/g, '');
+                        municipioSelect.add(option);
+                        munSeleccionados.push(row.CVE_MUN)
+                    }
+
+                }
+            });
+
+            // Limpiar las opciones del selector de localidades
+            localidadSelect.innerHTML = '';
+        });
+
+        municipioSelect.addEventListener('change', () => {
+            const municipioSeleccionado = municipioSelect.value;
+            const estadoSeleccionado = estadoSelect.value;
+
+            localidadSelect.innerHTML = '';
+
+            csvData.forEach((row) => {
+                if (row.CVE_MUN.includes(municipioSeleccionado)&&row.CVE_ENT.includes(estadoSeleccionado)) {
+                    console.log(municipioSeleccionado+" "+row.CVE_MUN.replace(/['"]+/g+" "+row.NOM_LOC.replace(/['"]+/g, '')))
+                    const optionLoc = document.createElement('option');
+                    optionLoc.text = row.NOM_LOC.replace(/['"]+/g, '');
+                    optionLoc.value = row.CVE_LOC.replace(/['"]+/g, '');
+                    localidadSelect.add(optionLoc);
+                }
+            });
+        });
+    });
+
 function loadScreen(seleccion) {
-    const caption=document.getElementById('regimen')
-    const restOfData=document.getElementById('restOfData')
-    document.getElementById('regimen').style.display="block"
+    const caption = document.getElementById('captionSeleccion')
+    const restOfData = document.getElementById('restOfData')
 
-    caption.style.display="none";
-    restOfData.style.display="block";
+    caption.style.display = "none";
+    restOfData.style.display = "block";
 
-    if (seleccion=='Fisica') {
-        document.getElementById('fisicaContainer').style.display="block";
-        document.getElementById('moralContainer').style.display="none";
+    if (seleccion == 'Fisica') {
+        document.getElementById('fisicaContainer').style.display = "block";
+        document.getElementById('moralContainer').style.display = "none";
     } else {
-        document.getElementById('moralContainer').style.display="block";
-        document.getElementById('fisicaContainer').style.display="none";
-    }   
+        document.getElementById('moralContainer').style.display = "block";
+        document.getElementById('fisicaContainer').style.display = "none";
+    }
 }

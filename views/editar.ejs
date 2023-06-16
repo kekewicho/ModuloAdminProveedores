@@ -1,0 +1,269 @@
+<!-- layout.ejs -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SEDUZAC - <%= pageTitle %>
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <!-- No mover el de header -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/registro.css">
+</head>
+
+<body>
+    <%- include('partials/header.ejs') %>
+        <main>
+            <form action="/submitRegistro" class="container">
+                <div class="form-group col-md-8">
+                    <label for="Régimen">Régimen</label>
+                    <select name="regimen" class="form-select" aria-label="Default select example"
+                        onchange="loadScreen(this.value)" id="regimen">
+                        <option selected disabled>Selecciona una opción</option>
+                        <option value="Fisica">Persona Física</option>
+                        <option value="Moral">Persona Moral</option>
+                    </select>
+                </div>
+                <div class="form-group" id="captionSeleccion" style="text-align: center;">
+                    <label class="form-text">Para comenzar, selecciona un régimen</label>
+                </div>
+                <div class="form-group toHide" id="fisicaContainer">
+                    <h4>Información fiscal</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Primer apellido">Primer apellido</label>
+                            <input class="form-control" type="text" name="primerApellido">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="segundoApellido">Segundo apellido</label>
+                            <input class="form-control" type="text" name="segundoApellido" id="segundoApellido">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre(s)</label>
+                        <input class="form-control" type="text" name="nombre" id="nombre">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="fechaNacimiento">Fecha de nacimiento</label>
+                        <input class="form-control" type="date" name="fechaNacimiento" id="fechaNacimiento">
+                    </div>
+                </div>
+                <div class="form-group toHide" id="moralContainer">
+                    <h4>Información fiscal</h4>
+                    <hr>
+                    <div class="form-group">
+                        <label for="razonSocial">Razón social</label>
+                        <input class="form-control" type="text" name="razonSocial" id="razonSocial">
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaConstitucion">Fecha de constitución</label>
+                        <input class="form-control" type="date" name="Fecha de fechaConstitucion"
+                            id="fechaConstitucion">
+                    </div>
+                    <div class="form-group">
+                        <label for="representanteLegal">Representante legal</label>
+                        <input class="form-control" type="text" name="representanteLegal" maxlength="50"
+                            id="representanteLegal">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cedulaProveedor">Cédula del proveedor</label>
+                        <input class="form-control" type="text" name="cedulaProveedor">
+                    </div>
+                </div>
+                <div id="restOfData" class="form-group">
+                    <div class="form-group col-md-4">
+                        <label for="rfc">RFC</label>
+                        <input class="form-control" type="text" name="rfc" maxlength="13" id="rfc">
+                    </div>
+                    <h4>Información del domicilio fiscal</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="Tipo de calle">Tipo de calle</label>
+                            <select class="form-select" type="text" name="tipoCalle">
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value="Avenida">Avenida</option>
+                                <option value="Calle">Calle</option>
+                                <option value="Boulevard">Boulevard</option>
+                                <option value="Carretera">Carretera</option>
+                                <option value="Carrera">Carrera</option>
+                                <option value="Camino">Camino</option>
+                                <option value="Pasaje">Pasaje</option>
+                                <option value="Paseo">Paseo</option>
+                                <option value="Plaza">Plaza</option>
+                                <option value="Autopista">Autopista</option>
+                                <option value="Sendero">Sendero</option>
+                                <option value="Ronda">Ronda</option>
+                                <option value="Rúa">Rúa</option>
+                                <option value="Travesía">Travesía</option>
+                                <option value="Vía">Vía</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="Nombre de calle">Nombre de calle</label>
+                            <input class="form-control" type="text" name="nombreCalle">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="Número exterior">Número exterior</label>
+                            <input class="form-control" type="text" name="noExterior">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Número interior">Número interior</label>
+                            <input class="form-control" type="text" name="noInterior" id="Número interior">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Tipo de asentamiento">Tipo de asentamiento</label>
+                        <select class="form-select" type="text" name="tipoAsentamiento">
+                            <option value="Colonia">Colonia</option>
+                            <option value="Barrio">Barrio</option>
+                            <option value="Fraccionamiento">Fraccionamiento</option>
+                            <option value="Residencial">Residencial</option>
+                            <option value="Conjunto habitacional">Conjunto habitacional</option>
+                            <option value="Urbanización">Urbanización</option>
+                            <option value="Unidad habitacional">Unidad habitacional</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Zona residencial">Zona residencial</option>
+                            <option value="Pueblo">Pueblo</option>
+                            <option value="Municipio">Municipio</option>
+                            <option value="Ranchería">Ranchería</option>
+                            <option value="Ejido">Ejido</option>
+                            <option value="Comunidad">Comunidad</option>
+                            <option value="Aldea">Aldea</option>
+                            <option value="Caserío">Caserío</option>
+                            <option value="Hacienda">Hacienda</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Ciudad">Ciudad</option>
+                            <option value="Localidad">Localidad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre de asentamiento">Nombre de asentamiento</label>
+                        <input class="form-control" type="text" name="nombreAsentamiento">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Código postal">Código postal</label>
+                        <input class="form-control" type="text" name="cp" id="Código postal">
+                    </div>
+                    <div class="form-group">
+                        <label>Entidad</label>
+                        <select class="form-select" id="entidad" name="entidad">
+                            <option value="" selected disabled>Selecciona una opción</option>
+                            <option value="01">Aguascalientes</option>
+                            <option value="02">Baja California</option>
+                            <option value="03">Baja California Sur</option>
+                            <option value="04">Campeche</option>
+                            <option value="05">Ciudad de Mexico</option>
+                            <option value="06">Coahuila</option>
+                            <option value="07">Colima</option>
+                            <option value="08">Chiapas</option>
+                            <option value="09">Chihuahua</option>
+                            <option value="10">Durango</option>
+                            <option value="11">Guanajuato</option>
+                            <option value="12">Guerrero</option>
+                            <option value="13">Hidalgo</option>
+                            <option value="14">Jalisco</option>
+                            <option value="15">Estado de Mexico</option>
+                            <option value="16">Michoacan</option>
+                            <option value="17">Morelos</option>
+                            <option value="18">Nayarit</option>
+                            <option value="19">Nuevo Leon</option>
+                            <option value="20">Oaxaca</option>
+                            <option value="21">Puebla</option>
+                            <option value="22">Queretaro</option>
+                            <option value="23">Quintana Roo</option>
+                            <option value="24">San Luis Potosi</option>
+                            <option value="25">Sinaloa</option>
+                            <option value="26">Sonora</option>
+                            <option value="27">Tabasco</option>
+                            <option value="28">Tamaulipas</option>
+                            <option value="29">Tlaxcala</option>
+                            <option value="30">Veracruz</option>
+                            <option value="31">Yucatan</option>
+                            <option value="32">Zacatecas</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label>Municipio</label>
+                            <select class="form-select" id="municipio" name="municipio" required>
+                                <option value="" selected disabled>Municipio</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Localidad</label>
+                            <select class="form-select" id="localidad" name="localidad" required>
+                                <option value="" selected disabled>Localidad</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h4>Información de contacto</h4>
+                    <hr>
+                    <div class="form-group row">
+                        <div class="form-group col-md-4">
+                            <label for="Teléfono">Teléfono</label>
+                            <input class="form-control" type="tel" name="telefono" maxlength="13" id="Teléfono">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="E-mail">E-mail</label>
+                            <input class="form-control" type="email" name="email" maxlength="30" id="E-mail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Giro del proveedor</label>
+                        <select class="form-select" name="giro" required>
+                            <option value="" selected disabled>Giro del proveedor</option>
+                            <option value="Alimentación y bebidas">Alimentación y bebidas</option>
+                            <option value="Automotriz">Automotriz</option>
+                            <option value="Belleza y cuidado personal">Belleza y cuidado personal</option>
+                            <option value="Construcción y contratistas">Construcción y contratistas</option>
+                            <option value="Consultoría y servicios profesionales">Consultoría y servicios profesionales</option>
+                            <option value="Educación y formación">Educación y formación</option>
+                            <option value="Electrónica y tecnología">Electrónica y tecnología</option>
+                            <option value="Entretenimiento y medios">Entretenimiento y medios</option>
+                            <option value="Finanzas y seguros">Finanzas y seguros</option>
+                            <option value="Salud y bienestar">Salud y bienestar</option>
+                            <option value="Hotelería y turismo">Hotelería y turismo</option>
+                            <option value="Manufactura y producción">Manufactura y producción</option>
+                            <option value="Moda y ropa">Moda y ropa</option>
+                            <option value="Publicidad y marketing">Publicidad y marketing</option>
+                            <option value="Retail y comercio electrónico">Retail y comercio electrónico</option>
+                            <option value="Servicios de limpieza y mantenimiento">Servicios de limpieza y mantenimiento
+                            </option>
+                            <option value="Servicios legales">Servicios legales</option>
+                            <option value="Servicios de logística y transporte">Servicios de logística y transporte
+                            </option>
+                            <option value="Servicios de software y desarrollo de aplicaciones">Servicios de software y
+                                desarrollo de aplicaciones</option>
+                            <option value="Servicios de telecomunicaciones">Servicios de telecomunicaciones</option>
+                            <option value="Servicios inmobiliarios">Servicios inmobiliarios</option>
+                            <option value="Agricultura y agroindustria">Agricultura y agroindustria</option>
+                            <option value="Energía y medio ambiente">Energía y medio ambiente</option>
+                            <option value="Arte y cultura">Arte y cultura</option>
+                            <option value="Organizaciones sin fines de lucro">Organizaciones sin fines de lucro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: bold;"><input type="checkbox" id="cbox1" value="checked" name="tyc">
+                            He
+                            leido y acepto los Términos y Condiciones</label><br>
+                    </div>
+                    <button class="btn" type="submit" style="margin-top: 35px;">Registrar</button>
+                </div>
+            </form>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+        <script src="/script/registro.js"></script>
+</body>
+
+</html>

@@ -52,6 +52,7 @@ const proveedoresSchema = new mongoose.Schema({
   email: { type: String, require: false },
   telefono: { type: String, require: false },
   giro: { type: String, require: false },
+  tyc: { type: String, require: false },
   status: { type: String, require: false },
 }, { collection: 'Proveedores' }, { timestamps: true });
 
@@ -77,20 +78,38 @@ app.get('/login', (req, res) => {
   });
 });
 
-app.get('/administracion',requireLogin, (req, res) => {
-  solicitudesPendientes=Proveedores.find({"status":'pendiente'},'rfc razonSocial giro entidad status')
-    .then(data=>{
+app.get('/success', (req, res) => {
+  res.render('success', {
+    pageTitle: 'Registro exitoso'
+  });
+});
+
+app.get('/administracion', requireLogin, (req, res) => {
+  solicitudesPendientes = Proveedores.find({ "status": 'pendiente' }, 'rfc razonSocial giro entidad status')
+    .then(data => {
       console.log(data)
       res.render('panelAdministracion', {
-        pageTitle: 'Administracion',
-        solicitudesPendientes:data,
+        pageTitle: 'Administración',
+        solicitudesPendientes: data,
       });
     });
 })
 
 app.get('/registro', (req, res) => {
-  res.render('registro',{
-    pageTitle:'Registro'
+  res.render('registro', {
+    pageTitle: 'Registro'
+  });
+})
+
+app.get('/editarRegistro/:rfc', (req, res) => {
+  const rfc = req.params.rfc;
+  Proveedores.findOne({ 'rfc': rfc })
+  .then(data => {
+    console.log(data)
+    res.render('editar', {
+      pageTitle: 'Inspeccionar | Editar',
+      data:data,
+    });
   });
 })
 
@@ -103,11 +122,25 @@ app.post('/submitLogin', async (req, res) => {
   console.log(formData.contraseña == passwordDB.password);
 
   if (formData.contraseña === passwordDB.password) {
-    req.session.loggedIn=true;
+    req.session.loggedIn = true;
     res.send({ 'status': 'success' });
   } else {
     res.send({ 'status': 'error' });
   }
+});
+
+app.post('/submitRegistro', async (req, res) => {
+  const registro = req.body;
+  registro.status='pendiente'
+  registro.razonSocial=registro.nombre+" "+registro.primerApellido+" "+registro.segundoApellido
+  Proveedores.create(registro)
+    .then(resultado => {
+      console.log("Proveedor registrado con éxito")
+      res.redirect('/success')
+    })
+    .catch(error => {
+      console.log('Error en el registro:' + error)
+    })
 });
 
 function requireLogin(req, res, next) {
@@ -123,7 +156,7 @@ function requireLogin(req, res, next) {
 app.post('/queryProveedor', async (req, res) => {
   const rfc = req.body.rfc;
 
-  Proveedores.findOne({'rfc': rfc}, 'rfc razonSocial giro entidad status')
+  Proveedores.findOne({ 'rfc': rfc }, 'rfc razonSocial giro entidad status')
     .then(data => {
       if (!data) {
         // Si no se encontró ningún proveedor

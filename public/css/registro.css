@@ -2,8 +2,16 @@ main {
     padding-block: 50px;
 }
 
+.row div {
+    margin-bottom: 0;
+}
+
 div {
-    margin-bottom: 35px;
+    margin-bottom: 15px;
+}
+
+h4 {
+    margin-top: 35px;
 }
 
 .toHide {
@@ -11,7 +19,7 @@ div {
 }
 
 #restOfData {
-    display:none;
+    display: none;
 }
 
 button {
