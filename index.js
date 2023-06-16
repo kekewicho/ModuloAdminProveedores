@@ -132,7 +132,9 @@ app.post('/submitLogin', async (req, res) => {
 app.post('/submitRegistro', async (req, res) => {
   const registro = req.body;
   registro.status='pendiente'
-  registro.razonSocial=registro.nombre+" "+registro.primerApellido+" "+registro.segundoApellido
+  if (registro.regimen=='Fisica') {
+    registro.razonSocial=registro.nombre+" "+registro.primerApellido+" "+registro.segundoApellido
+  }
   Proveedores.create(registro)
     .then(resultado => {
       console.log("Proveedor registrado con éxito")
