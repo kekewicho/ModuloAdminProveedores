@@ -104,14 +104,17 @@ app.get('/registro', (req, res) => {
 app.get('/editarRegistro/:rfc', (req, res) => {
   const rfc = req.params.rfc;
   Proveedores.findOne({ 'rfc': rfc })
-  .then(data => {
-    console.log(data)
-    res.render('editar', {
-      pageTitle: 'Inspeccionar | Editar',
-      data:data,
+    .then(data => {
+      console.log(data.municipio);
+      res.render('editar', {
+        pageTitle: 'Inspeccionar | Editar',
+        data: {
+          ...data.toObject(),
+          municipio: data.municipio.toString() // Convertir a cadena de texto
+        }
+      });
     });
-  });
-})
+});
 
 // Endpoints auxiliares
 
@@ -147,11 +150,24 @@ app.post('/submitRegistro', async (req, res) => {
 
 app.post('/updateRegistro', async (req, res) => {
   const registro = req.body;
-  Proveedores.findOneAndUpdate({'rfc':registro.rfc},registro)
-    .then(data=>{
-      res.redirect('/administracion');
+  console.log(registro);
+  
+  if (registro.regimen == 'Fisica') {
+    registro.razonSocial = registro.nombre + " " + registro.primerApellido + " " + registro.segundoApellido;
+  }
+  
+  Proveedores.findOneAndUpdate({ 'rfc': registro.rfc }, registro)
+    .then(resultado => {
+      res.json({ success: true }); // Envía una respuesta JSON de éxito
+      
+      // No se requiere redirección aquí
     })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ error: true }); // Envía una respuesta JSON de error
+    });
 });
+
 
 function requireLogin(req, res, next) {
   if (req.session.loggedIn) {

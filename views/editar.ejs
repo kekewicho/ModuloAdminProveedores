@@ -13,250 +13,400 @@
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <!-- No mover el de header -->
     <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/registro.css">
+    <link rel="stylesheet" href="/css/editar.css">
 </head>
 
 <body>
     <%- include('partials/header.ejs') %>
-    <main>
-        <form action="/submitRegistro" method="post" class="container">
-            <div class="form-group col-md-8">
-                <label for="Régimen">Régimen</label>
-                <select name="regimen" class="form-select" aria-label="Default select example"
-                    onchange="loadScreen(this.value)" id="regimen" disabled>
-                    <option disabled>Selecciona una opción</option>
-                    <option value="Fisica" <% if (data.regimen=='Fisica') { %> selected <% } %> >Persona Física</option>
-                    <option value="Moral"<% if (data.regimen=='Moral') { %> selected <% } %> >Persona Moral</option>
-                </select>
-            </div>
-            <div class="form-group toHide" id="fisicaContainer">
-                <h4>Información fiscal</h4>
-                <hr>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="Primer apellido">Primer apellido</label>
-                        <input class="form-control" type="text" name="primerApellido" value="<%= data.primerApellido %>">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="segundoApellido">Segundo apellido</label>
-                        <input class="form-control" type="text" name="segundoApellido" value="<%= data.segundoApellido %>" id="segundoApellido">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="nombre">Nombre(s)</label>
-                    <input class="form-control" type="text" name="nombre" value="<%= data.nombre %>" id="nombre">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="fechaNacimiento">Fecha de nacimiento</label>
-                    <input class="form-control" type="date" name="fechaNacimiento" value="<%= data.fechaNacimiento %>" id="fechaNacimiento">
-                </div>
-            </div>
-            <div class="form-group toHide" id="moralContainer">
-                <h4>Información fiscal</h4>
-                <hr>
-                <div class="form-group">
-                    <label for="razonSocial">Razón social</label>
-                    <input class="form-control" type="text" name="razonSocial" value="<%= data.razonSocial %>" id="razonSocial">
-                </div>
-                <div class="form-group">
-                    <label for="fechaConstitucion">Fecha de constitución</label>
-                    <input class="form-control" type="date" name="fechaConstitucion" value="<%= data.fechaConstitucion %>"
-                        id="fechaConstitucion">
-                </div>
-                <div class="form-group">
-                    <label for="representanteLegal">Representante legal</label>
-                    <input class="form-control" type="text" name="representanteLegal" value="<%= data.representanteLegal %>" maxlength="50"
-                        id="representanteLegal">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="cedulaProveedor">Cédula del proveedor</label>
-                    <input class="form-control" type="text" name="cedulaProveedor" value="<%= data.cedulaProveedor %>">
-                </div>
-            </div>
-            <div id="restOfData" class="form-group">
-                <div class="form-group col-md-4">
-                    <label for="rfc">RFC</label>
-                    <input class="form-control" type="text" name="rfc" value="<%= data.rfc %>" maxlength="13" id="rfc">
-                </div>
-                <h4>Información del domicilio fiscal</h4>
-                <hr>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="Tipo de calle">Tipo de calle</label>
-                        <select class="form-select" type="text" name="tipoCalle">
-                            <option <% if (data.tipoCalle=="Avenida") { %> selected <% } %>  value="Avenida">Avenida</option>
-                            <option <% if (data.tipoCalle=="Calle") { %> selected <% } %>  value="Calle">Calle</option>
-                            <option <% if (data.tipoCalle=="Boulevard") { %> selected <% } %>  value="Boulevard">Boulevard</option>
-                            <option <% if (data.tipoCalle=="Carretera") { %> selected <% } %>  value="Carretera">Carretera</option>
-                            <option <% if (data.tipoCalle=="Carrera") { %> selected <% } %>  value="Carrera">Carrera</option>
-                            <option <% if (data.tipoCalle=="Camino") { %> selected <% } %>  value="Camino">Camino</option>
-                            <option <% if (data.tipoCalle=="Pasaje") { %> selected <% } %>  value="Pasaje">Pasaje</option>
-                            <option <% if (data.tipoCalle=="Paseo") { %> selected <% } %>  value="Paseo">Paseo</option>
-                            <option <% if (data.tipoCalle=="Plaza") { %> selected <% } %>  value="Plaza">Plaza</option>
-                            <option <% if (data.tipoCalle=="Autopista") { %> selected <% } %>  value="Autopista">Autopista</option>
-                            <option <% if (data.tipoCalle=="Sendero") { %> selected <% } %>  value="Sendero">Sendero</option>
-                            <option <% if (data.tipoCalle=="Ronda") { %> selected <% } %>  value="Ronda">Ronda</option>
-                            <option <% if (data.tipoCalle=="Rúa") { %> selected <% } %>  value="Rúa">Rúa</option>
-                            <option <% if (data.tipoCalle=="Travesía") { %> selected <% } %>  value="Travesía">Travesía</option>
-                            <option <% if (data.tipoCalle=="Vía") { %> selected <% } %>  value="Vía">Vía</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-8">
-                        <label for="Nombre de calle">Nombre de calle</label>
-                        <input class="form-control" type="text" name="nombreCalle">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="Número exterior">Número exterior</label>
-                        <input class="form-control" type="text" name="noExterior" value="<%= data.noExterior %>">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Número interior">Número interior</label>
-                        <input class="form-control" type="text" name="noInterior" value="<%= data.noInterior %>" id="Número interior">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="Tipo de asentamiento">Tipo de asentamiento</label>
-                    <select class="form-select" type="text" name="tipoAsentamiento">
-                        <option <% if (data.tipoAsentamiento=='Colonia') { %> selected <% } %> value="Colonia">Colonia</option>
-                        <option <% if (data.tipoAsentamiento=='Barrio') { %> selected <% } %> value="Barrio">Barrio</option>
-                        <option <% if (data.tipoAsentamiento=='Fraccionamiento') { %> selected <% } %> value="Fraccionamiento">Fraccionamiento</option>
-                        <option <% if (data.tipoAsentamiento=='Residencial') { %> selected <% } %> value="Residencial">Residencial</option>
-                        <option <% if (data.tipoAsentamiento=='Conjunto habitacional') { %> selected <% } %> value="Conjunto habitacional">Conjunto habitacional</option>
-                        <option <% if (data.tipoAsentamiento=='Urbanización') { %> selected <% } %> value="Urbanización">Urbanización</option>
-                        <option <% if (data.tipoAsentamiento=='Unidad habitacional') { %> selected <% } %> value="Unidad habitacional">Unidad habitacional</option>
-                        <option <% if (data.tipoAsentamiento=='Villa') { %> selected <% } %> value="Villa">Villa</option>
-                        <option <% if (data.tipoAsentamiento=='Zona residencial') { %> selected <% } %> value="Zona residencial">Zona residencial</option>
-                        <option <% if (data.tipoAsentamiento=='Pueblo') { %> selected <% } %> value="Pueblo">Pueblo</option>
-                        <option <% if (data.tipoAsentamiento=='Municipio') { %> selected <% } %> value="Municipio">Municipio</option>
-                        <option <% if (data.tipoAsentamiento=='Ranchería') { %> selected <% } %> value="Ranchería">Ranchería</option>
-                        <option <% if (data.tipoAsentamiento=='Ejido') { %> selected <% } %> value="Ejido">Ejido</option>
-                        <option <% if (data.tipoAsentamiento=='Comunidad') { %> selected <% } %> value="Comunidad">Comunidad</option>
-                        <option <% if (data.tipoAsentamiento=='Aldea') { %> selected <% } %> value="Aldea">Aldea</option>
-                        <option <% if (data.tipoAsentamiento=='Caserío') { %> selected <% } %> value="Caserío">Caserío</option>
-                        <option <% if (data.tipoAsentamiento=='Hacienda') { %> selected <% } %> value="Hacienda">Hacienda</option>
-                        <option <% if (data.tipoAsentamiento=='Villa') { %> selected <% } %> value="Villa">Villa</option>
-                        <option <% if (data.tipoAsentamiento=='Ciudad') { %> selected <% } %> value="Ciudad">Ciudad</option>
-                        <option <% if (data.tipoAsentamiento=='Localidad') { %> selected <% } %> value="Localidad">Localidad</option>
+        <main>
+            <form id="editarForm" class="container" method="post" action="/updateRegistro">
+                <div class="form-group col-md-8">
+                    <label for="Régimen">Régimen</label>
+                    <select name="regimen" class="form-select" aria-label="Default select example" <option
+                        disabled>Selecciona una opción</option>
+                        <option value="Fisica" <% if (data.regimen=='Fisica' ) { %> selected <% } %> >Persona Física
+                        </option>
+                        <option value="Moral" <% if (data.regimen=='Moral' ) { %> selected <% } %> >Persona Moral
+                        </option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="Nombre de asentamiento">Nombre de asentamiento</label>
-                    <input class="form-control" type="text" name="nombreAsentamiento" value="<%= data.nombreAsentamiento %>">
+                <div class="form-group" id="fisicaContainer" <% if (data.regimen=='Moral' ) { %> style="display: none;"
+                    <% } %> >
+                        <h4>Información fiscal</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="Primer apellido">Primer apellido</label>
+                                <input class="form-control" type="text" name="primerApellido"
+                                    value="<%= data.primerApellido %>">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="segundoApellido">Segundo apellido</label>
+                                <input class="form-control" type="text" name="segundoApellido"
+                                    value="<%= data.segundoApellido %>" id="segundoApellido">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Nombre(s)</label>
+                            <input class="form-control" type="text" name="nombre" value="<%= data.nombre %>"
+                                id="nombre">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="fechaNacimiento">Fecha de nacimiento</label>
+                            <input class="form-control" type="date" name="fechaNacimiento"
+                                value="<%= data.fechaNacimiento %>" id="fechaNacimiento">
+                        </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="Código postal">Código postal</label>
-                    <input class="form-control" type="text" name="cp" value="<%= data.cp %>" id="Código postal">
+                <div class="form-group" id="moralContainer" <% if (data.regimen=='Fisica' ) { %> style="display: none;"
+                    <% } %> >
+                        <h4>Información fiscal</h4>
+                        <hr>
+                        <div class="form-group">
+                            <label for="razonSocial">Razón social</label>
+                            <input class="form-control" type="text" name="razonSocial" value="<%= data.razonSocial %>"
+                                id="razonSocial">
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaConstitucion">Fecha de constitución</label>
+                            <input class="form-control" type="date" name="fechaConstitucion"
+                                value="<%= data.fechaConstitucion %>" id="fechaConstitucion">
+                        </div>
+                        <div class="form-group">
+                            <label for="representanteLegal">Representante legal</label>
+                            <input class="form-control" type="text" name="representanteLegal"
+                                value="<%= data.representanteLegal %>" maxlength="50" id="representanteLegal">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="cedulaProveedor">Cédula del proveedor</label>
+                            <input class="form-control" type="text" name="cedulaProveedor"
+                                value="<%= data.cedulaProveedor %>">
+                        </div>
                 </div>
-                <div class="form-group">
-                    <label>Entidad</label>
-                    <select class="form-select" id="entidad" name="entidad">
-                        <option value="" selected disabled>Selecciona una opción</option>
-                        <option <% if (data.entidad=='01') { %> selected <% } %> value="01">Aguascalientes</option>
-                        <option <% if (data.entidad=='02') { %> selected <% } %> value="02">Baja California</option>
-                        <option <% if (data.entidad=='03') { %> selected <% } %> value="03">Baja California Sur</option>
-                        <option <% if (data.entidad=='04') { %> selected <% } %> value="04">Campeche</option>
-                        <option <% if (data.entidad=='05') { %> selected <% } %> value="05">Ciudad de Mexico</option>
-                        <option <% if (data.entidad=='06') { %> selected <% } %> value="06">Coahuila</option>
-                        <option <% if (data.entidad=='07') { %> selected <% } %> value="07">Colima</option>
-                        <option <% if (data.entidad=='08') { %> selected <% } %> value="08">Chiapas</option>
-                        <option <% if (data.entidad=='09') { %> selected <% } %> value="09">Chihuahua</option>
-                        <option <% if (data.entidad=='10') { %> selected <% } %> value="10">Durango</option>
-                        <option <% if (data.entidad=='11') { %> selected <% } %> value="11">Guanajuato</option>
-                        <option <% if (data.entidad=='12') { %> selected <% } %> value="12">Guerrero</option>
-                        <option <% if (data.entidad=='13') { %> selected <% } %> value="13">Hidalgo</option>
-                        <option <% if (data.entidad=='14') { %> selected <% } %> value="14">Jalisco</option>
-                        <option <% if (data.entidad=='15') { %> selected <% } %> value="15">Estado de Mexico</option>
-                        <option <% if (data.entidad=='16') { %> selected <% } %> value="16">Michoacan</option>
-                        <option <% if (data.entidad=='17') { %> selected <% } %> value="17">Morelos</option>
-                        <option <% if (data.entidad=='18') { %> selected <% } %> value="18">Nayarit</option>
-                        <option <% if (data.entidad=='19') { %> selected <% } %> value="19">Nuevo Leon</option>
-                        <option <% if (data.entidad=='20') { %> selected <% } %> value="20">Oaxaca</option>
-                        <option <% if (data.entidad=='21') { %> selected <% } %> value="21">Puebla</option>
-                        <option <% if (data.entidad=='22') { %> selected <% } %> value="22">Queretaro</option>
-                        <option <% if (data.entidad=='23') { %> selected <% } %> value="23">Quintana Roo</option>
-                        <option <% if (data.entidad=='24') { %> selected <% } %> value="24">San Luis Potosi</option>
-                        <option <% if (data.entidad=='25') { %> selected <% } %> value="25">Sinaloa</option>
-                        <option <% if (data.entidad=='26') { %> selected <% } %> value="26">Sonora</option>
-                        <option <% if (data.entidad=='27') { %> selected <% } %> value="27">Tabasco</option>
-                        <option <% if (data.entidad=='28') { %> selected <% } %> value="28">Tamaulipas</option>
-                        <option <% if (data.entidad=='29') { %> selected <% } %> value="29">Tlaxcala</option>
-                        <option <% if (data.entidad=='30') { %> selected <% } %> value="30">Veracruz</option>
-                        <option <% if (data.entidad=='31') { %> selected <% } %> value="31">Yucatan</option>
-                        <option <% if (data.entidad=='32') { %> selected <% } %> value="32">Zacatecas</option>
-                    </select>
-                </div>
-                <div class="form-group row">
-                    <div class="form-group col-md-6">
-                        <label>Municipio</label>
-                        <select class="form-select" id="municipio" name="municipio" required>
-                            <option value="" selected disabled>Municipio</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Localidad</label>
-                        <select class="form-select" id="localidad" name="localidad" required>
-                            <option value="" selected disabled>Localidad</option>
-                        </select>
-                    </div>
-                </div>
-                <h4>Información de contacto</h4>
-                <hr>
-                <div class="form-group row">
+                <div id="restOfData" class="form-group">
                     <div class="form-group col-md-4">
-                        <label for="Teléfono">Teléfono</label>
-                        <input class="form-control" type="tel" name="telefono" value="<%= data.telefono %>" maxlength="13" id="Teléfono">
+                        <label for="rfc">RFC</label>
+                        <input class="form-control" type="text" name="rfc" value="<%= data.rfc %>" maxlength="13"
+                            id="rfc">
                     </div>
-                    <div class="form-group col-md-8">
-                        <label for="E-mail">E-mail</label>
-                        <input class="form-control" type="email" name="email" value="<%= data.email %>" maxlength="30" id="E-mail">
+                    <h4>Información del domicilio fiscal</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="Tipo de calle">Tipo de calle</label>
+                            <select class="form-select" type="text" name="tipoCalle">
+                                <option <% if (data.tipoCalle=="Avenida" ) { %> selected <% } %> value="Avenida">Avenida
+                                </option>
+                                <option <% if (data.tipoCalle=="Calle" ) { %> selected <% } %> value="Calle">Calle
+                                </option>
+                                <option <% if (data.tipoCalle=="Boulevard" ) { %> selected <% } %>
+                                        value="Boulevard">Boulevard</option>
+                                <option <% if (data.tipoCalle=="Carretera" ) { %> selected <% } %>
+                                        value="Carretera">Carretera</option>
+                                <option <% if (data.tipoCalle=="Carrera" ) { %> selected <% } %> value="Carrera">Carrera
+                                </option>
+                                <option <% if (data.tipoCalle=="Camino" ) { %> selected <% } %> value="Camino">Camino
+                                </option>
+                                <option <% if (data.tipoCalle=="Pasaje" ) { %> selected <% } %> value="Pasaje">Pasaje
+                                </option>
+                                <option <% if (data.tipoCalle=="Paseo" ) { %> selected <% } %> value="Paseo">Paseo
+                                </option>
+                                <option <% if (data.tipoCalle=="Plaza" ) { %> selected <% } %> value="Plaza">Plaza
+                                </option>
+                                <option <% if (data.tipoCalle=="Autopista" ) { %> selected <% } %>
+                                        value="Autopista">Autopista</option>
+                                <option <% if (data.tipoCalle=="Sendero" ) { %> selected <% } %> value="Sendero">Sendero
+                                </option>
+                                <option <% if (data.tipoCalle=="Ronda" ) { %> selected <% } %> value="Ronda">Ronda
+                                </option>
+                                <option <% if (data.tipoCalle=="Rúa" ) { %> selected <% } %> value="Rúa">Rúa</option>
+                                <option <% if (data.tipoCalle=="Travesía" ) { %> selected <% } %>
+                                        value="Travesía">Travesía</option>
+                                <option <% if (data.tipoCalle=="Vía" ) { %> selected <% } %> value="Vía">Vía</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="Nombre de calle">Nombre de calle</label>
+                            <input class="form-control" type="text" name="nombreCalle" value="<%= data.nombreCalle %>">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>Giro del proveedor</label>
-                    <select class="form-select" name="giro" required>
-                        <option value="" disabled>Giro del proveedor</option>
-                        <option <% if (giro=='Alimentación y bebidas') { %> selected <% } %> value="Alimentación y bebidas">Alimentación y bebidas</option>
-                        <option <% if (giro=='Automotriz') { %> selected <% } %> value="Automotriz">Automotriz</option>
-                        <option <% if (giro=='Belleza y cuidado') { %> selected <% } %> value="Belleza y cuidado personal">Belleza y cuidado personal</option>
-                        <option <% if (giro=='Construcción y contratistas') { %> selected <% } %> value="Construcción y contratistas">Construcción y contratistas</option>
-                        <option <% if (giro=='Consultoría y servicios') { %> selected <% } %> value="Consultoría y servicios profesionales">Consultoría y servicios profesionales</option>
-                        <option <% if (giro=='Educación y formación') { %> selected <% } %> value="Educación y formación">Educación y formación</option>
-                        <option <% if (giro=='Electrónica y tecnología') { %> selected <% } %> value="Electrónica y tecnología">Electrónica y tecnología</option>
-                        <option <% if (giro=='Entretenimiento y medios') { %> selected <% } %> value="Entretenimiento y medios">Entretenimiento y medios</option>
-                        <option <% if (giro=='Finanzas y seguros') { %> selected <% } %> value="Finanzas y seguros">Finanzas y seguros</option>
-                        <option <% if (giro=='Salud y bienestar') { %> selected <% } %> value="Salud y bienestar">Salud y bienestar</option>
-                        <option <% if (giro=='Hotelería y turismo') { %> selected <% } %> value="Hotelería y turismo">Hotelería y turismo</option>
-                        <option <% if (giro=='Manufactura y producción') { %> selected <% } %> value="Manufactura y producción">Manufactura y producción</option>
-                        <option <% if (giro=='Moda y ropa') { %> selected <% } %> value="Moda y ropa">Moda y ropa</option>
-                        <option <% if (giro=='Publicidad y marketing') { %> selected <% } %> value="Publicidad y marketing">Publicidad y marketing</option>
-                        <option <% if (giro=='Retail y comercio') { %> selected <% } %> value="Retail y comercio electrónico">Retail y comercio electrónico</option>
-                        <option <% if (giro=='Servicios de limpieza') { %> selected <% } %> value="Servicios de limpieza y mantenimiento">Servicios de limpieza y mantenimiento</option>
-                        <option <% if (giro=='Servicios legales') { %> selected <% } %> value="Servicios legales">Servicios legales</option>
-                        <option <% if (giro=='Servicios de logística') { %> selected <% } %> value="Servicios de logística y transporte">Servicios de logística y transporte</option>
-                        <option <% if (giro=='Servicios de software') { %> selected <% } %> value="Servicios de software y desarrollo de aplicaciones">Servicios de software y desarrollo de aplicaciones</option>
-                        <option <% if (giro=='Servicios de telecomunicaciones') { %> selected <% } %> value="Servicios de telecomunicaciones">Servicios de telecomunicaciones</option>
-                        <option <% if (giro=='Servicios inmobiliarios') { %> selected <% } %> value="Servicios inmobiliarios">Servicios inmobiliarios</option>
-                        <option <% if (giro=='Agricultura y agroindustria') { %> selected <% } %> value="Agricultura y agroindustria">Agricultura y agroindustria</option>
-                        <option <% if (giro=='Energía y medio ambiente') { %> selected <% } %> value="Energía y medio ambiente">Energía y medio ambiente</option>
-                        <option <% if (giro=='Arte y cultura') { %> selected <% } %> value="Arte y cultura">Arte y cultura</option>
-                        <option <% if (giro=='Organizaciones sin fines de lucro') { %> selected <% } %> value="Organizaciones sin fines de lucro">Organizaciones sin fines de lucro</option>
-                    </select>
-            </div class="form-group row">
-                <div class="form-group col-md-6">
-                    <button class="btn btn-danger" type="submit" style="margin-top: 35px;">Rechazar solicitud</button>
-                </div>
-                <div class="form-group col-md-6">
-                    <button class="btn btn-success" type="submit" style="margin-top: 35px;">Aceptar solicitud</button>
-                </div>
-            </div>
-        </form>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-    <script src="/script/registro.js"></script>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="Número exterior">Número exterior</label>
+                            <input class="form-control" type="text" name="noExterior" value="<%= data.noExterior %>">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Número interior">Número interior</label>
+                            <input class="form-control" type="text" name="noInterior" value="<%= data.noInterior %>"
+                                id="Número interior">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Tipo de asentamiento">Tipo de asentamiento</label>
+                        <select class="form-select" type="text" name="tipoAsentamiento">
+                            <option <% if (data.tipoAsentamiento=='Colonia' ) { %> selected <% } %>
+                                    value="Colonia">Colonia</option>
+                            <option <% if (data.tipoAsentamiento=='Barrio' ) { %> selected <% } %> value="Barrio">Barrio
+                            </option>
+                            <option <% if (data.tipoAsentamiento=='Fraccionamiento' ) { %> selected <% } %>
+                                    value="Fraccionamiento">Fraccionamiento</option>
+                            <option <% if (data.tipoAsentamiento=='Residencial' ) { %> selected <% } %>
+                                    value="Residencial">Residencial</option>
+                            <option <% if (data.tipoAsentamiento=='Conjunto habitacional' ) { %> selected <% } %>
+                                    value="Conjunto habitacional">Conjunto habitacional</option>
+                            <option <% if (data.tipoAsentamiento=='Urbanización' ) { %> selected <% } %>
+                                    value="Urbanización">Urbanización</option>
+                            <option <% if (data.tipoAsentamiento=='Unidad habitacional' ) { %> selected <% } %>
+                                    value="Unidad habitacional">Unidad habitacional</option>
+                            <option <% if (data.tipoAsentamiento=='Villa' ) { %> selected <% } %> value="Villa">Villa
+                            </option>
+                            <option <% if (data.tipoAsentamiento=='Zona residencial' ) { %> selected <% } %> value="Zona
+                                    residencial">Zona residencial</option>
+                            <option <% if (data.tipoAsentamiento=='Pueblo' ) { %> selected <% } %> value="Pueblo">Pueblo
+                            </option>
+                            <option <% if (data.tipoAsentamiento=='Municipio' ) { %> selected <% } %>
+                                    value="Municipio">Municipio</option>
+                            <option <% if (data.tipoAsentamiento=='Ranchería' ) { %> selected <% } %>
+                                    value="Ranchería">Ranchería</option>
+                            <option <% if (data.tipoAsentamiento=='Ejido' ) { %> selected <% } %> value="Ejido">Ejido
+                            </option>
+                            <option <% if (data.tipoAsentamiento=='Comunidad' ) { %> selected <% } %>
+                                    value="Comunidad">Comunidad</option>
+                            <option <% if (data.tipoAsentamiento=='Aldea' ) { %> selected <% } %> value="Aldea">Aldea
+                            </option>
+                            <option <% if (data.tipoAsentamiento=='Caserío' ) { %> selected <% } %>
+                                    value="Caserío">Caserío</option>
+                            <option <% if (data.tipoAsentamiento=='Hacienda' ) { %> selected <% } %>
+                                    value="Hacienda">Hacienda</option>
+                            <option <% if (data.tipoAsentamiento=='Villa' ) { %> selected <% } %> value="Villa">Villa
+                            </option>
+                            <option <% if (data.tipoAsentamiento=='Ciudad' ) { %> selected <% } %> value="Ciudad">Ciudad
+                            </option>
+                            <option <% if (data.tipoAsentamiento=='Localidad' ) { %> selected <% } %>
+                                    value="Localidad">Localidad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre de asentamiento">Nombre de asentamiento</label>
+                        <input class="form-control" type="text" name="nombreAsentamiento"
+                            value="<%= data.nombreAsentamiento %>">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Código postal">Código postal</label>
+                        <input class="form-control" type="text" name="cp" value="<%= data.cp %>" id="Código postal">
+                    </div>
+                    <div class="form-group">
+                        <label>Entidad</label>
+                        <select class="form-select" id="entidad" name="entidad">
+                            <option value="" selected disabled>Selecciona una opción</option>
+                            <option <% if (data.entidad=='01' ) { %> selected <% } %> value="01">Aguascalientes</option>
+                            <option <% if (data.entidad=='02' ) { %> selected <% } %> value="02">Baja California
+                            </option>
+                            <option <% if (data.entidad=='03' ) { %> selected <% } %> value="03">Baja California Sur
+                            </option>
+                            <option <% if (data.entidad=='04' ) { %> selected <% } %> value="04">Campeche</option>
+                            <option <% if (data.entidad=='05' ) { %> selected <% } %> value="05">Ciudad de Mexico
+                            </option>
+                            <option <% if (data.entidad=='06' ) { %> selected <% } %> value="06">Coahuila</option>
+                            <option <% if (data.entidad=='07' ) { %> selected <% } %> value="07">Colima</option>
+                            <option <% if (data.entidad=='08' ) { %> selected <% } %> value="08">Chiapas</option>
+                            <option <% if (data.entidad=='09' ) { %> selected <% } %> value="09">Chihuahua</option>
+                            <option <% if (data.entidad=='10' ) { %> selected <% } %> value="10">Durango</option>
+                            <option <% if (data.entidad=='11' ) { %> selected <% } %> value="11">Guanajuato</option>
+                            <option <% if (data.entidad=='12' ) { %> selected <% } %> value="12">Guerrero</option>
+                            <option <% if (data.entidad=='13' ) { %> selected <% } %> value="13">Hidalgo</option>
+                            <option <% if (data.entidad=='14' ) { %> selected <% } %> value="14">Jalisco</option>
+                            <option <% if (data.entidad=='15' ) { %> selected <% } %> value="15">Estado de Mexico
+                            </option>
+                            <option <% if (data.entidad=='16' ) { %> selected <% } %> value="16">Michoacan</option>
+                            <option <% if (data.entidad=='17' ) { %> selected <% } %> value="17">Morelos</option>
+                            <option <% if (data.entidad=='18' ) { %> selected <% } %> value="18">Nayarit</option>
+                            <option <% if (data.entidad=='19' ) { %> selected <% } %> value="19">Nuevo Leon</option>
+                            <option <% if (data.entidad=='20' ) { %> selected <% } %> value="20">Oaxaca</option>
+                            <option <% if (data.entidad=='21' ) { %> selected <% } %> value="21">Puebla</option>
+                            <option <% if (data.entidad=='22' ) { %> selected <% } %> value="22">Queretaro</option>
+                            <option <% if (data.entidad=='23' ) { %> selected <% } %> value="23">Quintana Roo</option>
+                            <option <% if (data.entidad=='24' ) { %> selected <% } %> value="24">San Luis Potosi
+                            </option>
+                            <option <% if (data.entidad=='25' ) { %> selected <% } %> value="25">Sinaloa</option>
+                            <option <% if (data.entidad=='26' ) { %> selected <% } %> value="26">Sonora</option>
+                            <option <% if (data.entidad=='27' ) { %> selected <% } %> value="27">Tabasco</option>
+                            <option <% if (data.entidad=='28' ) { %> selected <% } %> value="28">Tamaulipas</option>
+                            <option <% if (data.entidad=='29' ) { %> selected <% } %> value="29">Tlaxcala</option>
+                            <option <% if (data.entidad=='30' ) { %> selected <% } %> value="30">Veracruz</option>
+                            <option <% if (data.entidad=='31' ) { %> selected <% } %> value="31">Yucatan</option>
+                            <option <% if (data.entidad=='32' ) { %> selected <% } %> value="32">Zacatecas</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label>Municipio</label>
+                            <select class="form-select" id="municipio" name="municipio" required>
+                                <option value="" selected disabled>Municipio</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Localidad</label>
+                            <select class="form-select" id="localidad" name="localidad" required>
+                                <option value="" selected disabled>Localidad</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h4>Información de contacto</h4>
+                    <hr>
+                    <div class="form-group row">
+                        <div class="form-group col-md-4">
+                            <label for="Teléfono">Teléfono</label>
+                            <input class="form-control" type="tel" name="telefono" value="<%= data.telefono %>"
+                                maxlength="13" id="Teléfono">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="E-mail">E-mail</label>
+                            <input class="form-control" type="email" name="email" value="<%= data.email %>"
+                                maxlength="30" id="E-mail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Giro del proveedor</label>
+                        <select class="form-select" name="giro" required>
+                            <option value="" disabled>Giro del proveedor</option>
+                            <option <% if (data.giro=='Alimentación y bebidas' ) { %> selected <% } %>
+                                    value="Alimentación y bebidas">Alimentación y bebidas</option>
+                            <option <% if (data.giro=='Automotriz' ) { %> selected <% } %> value="Automotriz">Automotriz
+                            </option>
+                            <option <% if (data.giro=='Belleza y cuidado' ) { %> selected <% } %> value="Belleza y
+                                    cuidado personal">Belleza y cuidado personal</option>
+                            <option <% if (data.giro=='Construcción y contratistas' ) { %> selected <% } %>
+                                    value="Construcción y contratistas">Construcción y contratistas</option>
+                            <option <% if (data.giro=='Consultoría y servicios' ) { %> selected <% } %>
+                                    value="Consultoría y servicios profesionales">Consultoría y servicios profesionales
+                            </option>
+                            <option <% if (data.giro=='Educación y formación' ) { %> selected <% } %> value="Educación y
+                                    formación">Educación y formación</option>
+                            <option <% if (data.giro=='Electrónica y tecnología' ) { %> selected <% } %>
+                                    value="Electrónica y tecnología">Electrónica y tecnología</option>
+                            <option <% if (data.giro=='Entretenimiento y medios' ) { %> selected <% } %>
+                                    value="Entretenimiento y medios">Entretenimiento y medios</option>
+                            <option <% if (data.giro=='Finanzas y seguros' ) { %> selected <% } %> value="Finanzas y
+                                    seguros">Finanzas y seguros</option>
+                            <option <% if (data.giro=='Salud y bienestar' ) { %> selected <% } %> value="Salud y
+                                    bienestar">Salud y bienestar</option>
+                            <option <% if (data.giro=='Hotelería y turismo' ) { %> selected <% } %> value="Hotelería y
+                                    turismo">Hotelería y turismo</option>
+                            <option <% if (data.giro=='Manufactura y producción' ) { %> selected <% } %>
+                                    value="Manufactura y producción">Manufactura y producción</option>
+                            <option <% if (data.giro=='Moda y ropa' ) { %> selected <% } %> value="Moda y ropa">Moda y
+                                    ropa</option>
+                            <option <% if (data.giro=='Publicidad y marketing' ) { %> selected <% } %> value="Publicidad
+                                    y marketing">Publicidad y marketing</option>
+                            <option <% if (data.giro=='Retail y comercio' ) { %> selected <% } %> value="Retail y
+                                    comercio electrónico">Retail y comercio electrónico</option>
+                            <option <% if (data.giro=='Servicios de limpieza y mantenimiento' ) { %> selected <% } %>
+                                    value="Servicios de limpieza y mantenimiento">Servicios de limpieza y mantenimiento
+                            </option>
+                            <option <% if (data.giro=='Servicios legales' ) { %> selected <% } %> value="Servicios
+                                    legales">Servicios legales</option>
+                            <option <% if (data.giro=='Servicios de logística' ) { %> selected <% } %> value="Servicios
+                                    de logística y transporte">Servicios de logística y transporte</option>
+                            <option <% if (data.giro=='Servicios de software' ) { %> selected <% } %> value="Servicios
+                                    de software y desarrollo de aplicaciones">Servicios de software y desarrollo de
+                                    aplicaciones</option>
+                            <option <% if (data.giro=='Servicios de telecomunicaciones' ) { %> selected <% } %>
+                                    value="Servicios de telecomunicaciones">Servicios de telecomunicaciones</option>
+                            <option <% if (data.giro=='Servicios inmobiliarios' ) { %> selected <% } %> value="Servicios
+                                    inmobiliarios">Servicios inmobiliarios</option>
+                            <option <% if (data.giro=='Agricultura y agroindustria' ) { %> selected <% } %>
+                                    value="Agricultura y agroindustria">Agricultura y agroindustria</option>
+                            <option <% if (data.giro=='Energía y medio ambiente' ) { %> selected <% } %> value="Energía
+                                    y medio ambiente">Energía y medio ambiente</option>
+                            <option <% if (data.giro=='Arte y cultura' ) { %> selected <% } %> value="Arte y
+                                    cultura">Arte y cultura</option>
+                            <option <% if (data.giro=='Organizaciones sin fines de lucro' ) { %> selected <% } %>
+                                    value="Organizaciones sin fines de lucro">Organizaciones sin fines de lucro</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label for="status" style="color:brown"><strong>STATUS:</strong></label>
+                        <select class="form-select" name="status" id="status">
+                            <option value="pendiente" <% if (data.status=='pendiente') { %> selected <% } %> >Pendiente</option>
+                            <option value="activo" <% if (data.status=='activo') { %> selected <% } %> >Activo</option>
+                            <option value="rechazado" <% if (data.status=='rechazado') { %> selected <% } %> >Rechazado</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <button class="btn" type="submit" style="margin-top: 35px;">Actualizar</button>
+                    </div>
+            </form>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(() => {
+                const estadoSelect = document.getElementById('entidad');
+                const municipioSelect = document.getElementById('municipio');
+                const localidadSelect = document.getElementById('localidad');
+                let csvData;
+
+                fetch('/utils/localidadesData.csv')
+                    .then(response => response.text())
+                    .then(data => {
+                        const lines = data.split('\n');
+                        const headers = lines[0].split(',');
+
+                        csvData = lines.slice(1).map(line => {
+                            const columns = line.split(',');
+                            const rowData = {};
+
+                            headers.forEach((header, index) => {
+                                rowData[header] = columns[index];
+                            });
+
+                            return rowData;
+                        });
+
+                        csvData.forEach((row) => {
+                            munSeleccionados = [];
+
+                            csvData.forEach((row) => {
+                                if (row.CVE_ENT.includes(<%= data.entidad %>)) {
+                                    if (!munSeleccionados.includes(row.CVE_MUN)) {
+                                        const option = document.createElement('option');
+                                        option.text = row.NOM_MUN.replace(/['"]+/g, '');
+                                        option.value = row.CVE_MUN.replace(/['"]+/g, '');
+                                        if (row.CVE_MUN.includes('<%= data.municipio %>')) {
+                                            option.selected=true;
+                                        }
+
+                                        municipioSelect.add(option);
+                                        munSeleccionados.push(row.CVE_MUN)
+                                    }
+                                }
+                                
+                                if (row.CVE_MUN.includes('<%= data.municipio %>')&&row.CVE_ENT.includes('<%= data.entidad %>')) {
+                                    const optionLocalidad = document.createElement('option');
+                                    optionLocalidad.text = row.NOM_LOC.replace(/['"]+/g, '');
+                                    optionLocalidad.value = row.CVE_LOC.replace(/['"]+/g, '');
+                                    if (<%= data.localidad %>==row.CVE_LOC.replace(/['"]+/g, '')) {
+                                        optionLocalidad.selected=true;
+                                    }
+                                    localidadSelect.add(optionLocalidad);
+                                }
+
+
+                            });
+                        });
+
+
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener los datos CSV:', error);
+                    });
+            });
+
+
+        </script>
+        <script src="/script/editar.js"></script>
+        <script src="/script/fillMunicipios.js"></script>
 </body>
 
 </html>

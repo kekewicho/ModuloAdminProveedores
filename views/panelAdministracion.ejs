@@ -58,7 +58,7 @@
             <% if (element.status=='pendiente') { %> <td><i class="bi bi-hourglass"></i></td> <% } %>
             <% if (element.status=='aprobado') { %> <td><i class="bi bi-check2-all"></i></td> <% } %>
             <% if (element.status=='rechazado') { %> <td><i class="bi bi-x-lg"></i></td> <% } %>
-            <td><button class="btn btn-outline-danger"><i class="bi bi-eye"></i></button></td>            
+            <td><button class="btn btn-outline-danger" onclick="window.location.href='/editarRegistro/<%= element.rfc %>'"><i class="bi bi-eye"></i></button></td>            
           </tr>
           <% }) %>
         <% } else { %>

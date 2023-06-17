@@ -21,7 +21,7 @@ function filter(text) {
                         <td>${data.giro}</td>
                         <td>${data.entidad}</td>
                         ${icon}
-                        <td><button class="btn btn-outline-danger"><i class="bi bi-eye"></i></button></td>            
+                        <td><button class="btn btn-outline-danger" onclick="window.location.href='/editarRegistro/${data.rfc}'"><i class="bi bi-eye"></i></button></td>            
                     </tr>`
                 
                 tabla.innerHTML=row

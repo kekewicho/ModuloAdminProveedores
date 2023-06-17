@@ -1,0 +1,25 @@
+main {
+    padding-block: 50px;
+}
+
+.row div {
+    margin-bottom: 0;
+}
+
+div {
+    margin-bottom: 15px;
+}
+
+h4 {
+    margin-top: 35px;
+}
+
+button {
+    width: 100%;
+    background-color: #8b1d20 !important;
+    color: white !important;
+}
+
+label {
+    margin-left:10px;
+}
